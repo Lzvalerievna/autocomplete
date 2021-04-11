@@ -1,0 +1,84 @@
+
+.container {
+    width: 30%;
+    height: 100vh;
+    margin: 100px auto;
+    background: darkgrey;
+    overflow: hidden;
+
+}
+.input {
+    width: 73%;
+    margin-left: 55px;
+    margin-right: 40px;
+    padding-top: 5px;
+    margin-top: 50px;
+    font-size: 26px;
+    padding-left: 10px;
+    color: black;
+    border: 0;
+}
+.submenu {
+    width: 75.9%;
+    background: lightgray;
+    margin-left: 55px;
+    margin-bottom: 40px;
+}
+.submenu > div{
+    height: 25px;
+    padding-left: 10px;
+    font-size: 20px;
+    border: 1px solid black;
+}
+.submenu > div:hover {
+    background: dodgerblue;
+}
+.repo-container {
+    margin-left: 55px;
+    margin-top: 0px;
+    width: 75.9%;
+    height: 70px;
+    background: mediumorchid;
+    border: 1px solid black;
+}
+.repo-container_name {
+    margin-top: 0px;
+    margin-left: 10px;
+    padding-top: 5px;
+    font-size: 18px;
+}
+.repo-container_login {
+    margin-left: 10px;
+    margin-top: -20px;
+    font-size: 18px;
+}
+.repo-container_stars {
+    margin-left: 10px;
+    margin-top: -20px;
+    font-size: 18px;
+}
+.close{
+    margin-top: -75px;
+    margin-left: 260px;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.close:before,
+.close:after {
+    position: absolute;
+    content: ' ';
+    height: 45px;
+    width: 2px;
+    margin-left: 40px;
+    margin-top: 8px;
+    background-color: red;
+}
+.close:before {
+    transform: rotate(45deg);
+}
+.close:after {
+    transform: rotate(-45deg);
+}
+
