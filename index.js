@@ -9,29 +9,13 @@ const debounce = (fn, ms) => {
         timeout = setTimeout(fnCall, ms)
     }
 }
-// async function getResponse () {
-//     const value = searchInput.value
-//     const response = await fetch(`https://api.github.com/search/repositories?q=${value}&per_page=5`)
-//     const result = await response.json()
-//     console.log(result.items)
-// }
-// function getsubmenuName (getResponse) {
-//     getResponse().forEach((user) => {
-//         const submenuName = document.createElement('div');
-//         submenuName.classList.add('submenu_name')
-//         submenuPanel.appendChild(submenuName)
-//         submenuName.textContent = user.name;
-//     })
-// }
-// searchInput.addEventListener('keyup', debounce(getResponse, 500))
-
 
 searchInput.addEventListener('keyup', debounce(async () => {
     const value = searchInput.value
     submenuPanel.innerHTML = ''
     const response = await fetch(`https://api.github.com/search/repositories?q=${value}&per_page=5`)
     const result = await response.json()
-    console.log(result.items)
+//    console.log(result.items)
     result.items.forEach((user) => {
          const submenuName = document.createElement('div');
              submenuName.classList.add('submenu_name')
