@@ -9,19 +9,31 @@ const debounce = (fn, ms) => {
         timeout = setTimeout(fnCall, ms)
     }
 }
-
-searchInput.addEventListener('keyup', debounce(async () => {
+async function getResponse () {
+    submenuPanel.innerHTML = '';
     const value = searchInput.value
-    submenuPanel.innerHTML = ''
     const response = await fetch(`https://api.github.com/search/repositories?q=${value}&per_page=5`)
     const result = await response.json()
-//    console.log(result.items)
-    result.items.forEach((user) => {
-         const submenuName = document.createElement('div');
-             submenuName.classList.add('submenu_name')
-             submenuPanel.appendChild(submenuName)
-             submenuName.textContent = user.name;
-             submenuName.onclick = function () {
+    console.log(result.items)
+    let listItems = result.items
+    listItems.forEach(function (user) {
+        const submenuName = document.createElement('div');
+        submenuName.classList.add('submenu_name')
+        submenuPanel.appendChild(submenuName)
+        submenuName.textContent = user.name;
+        submenuName.addEventListener('click', e => {
+            showRepo(user);
+            submenuPanel.innerHTML = '';
+            searchInput.value = '';
+        })
+    })
+    if (value === '')  submenuPanel.innerHTML = '';
+}
+let debounce2 = debounce(getResponse, 500)
+searchInput.addEventListener('keyup', function (e)  {
+    if (e.keyCode !== 32) debounce2();
+})
+function showRepo(user) {
                  const repoContainer = document.createElement('div');
                     repoContainer.classList.add('repo-container')
                     repo.appendChild(repoContainer)
@@ -38,19 +50,13 @@ searchInput.addEventListener('keyup', debounce(async () => {
                     repoStars.textContent = `Stars: ${user.stargazers_count}`;
                     repoContainer.appendChild(repoStars)
                  const close = document.createElement('div');
-                 close.classList.add('close')
-                 repoContainer.appendChild(close)
-                 close.onclick = function () {
+                    close.classList.add('close')
+                    repoContainer.appendChild(close)
+                    close.onclick = function () {
                      repoContainer.remove()
                  }
-         }
-     })
-        if (value === '') {
-            submenuPanel.innerHTML = ''
         }
 
-}, 500)
-);
 
 
 
