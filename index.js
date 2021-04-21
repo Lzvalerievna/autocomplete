@@ -1,7 +1,6 @@
 const searchInput = document.querySelector('.input');
 const submenuPanel = document.querySelector('.submenu');
 const repo = document.querySelector('.repo');
-
 const debounce = (fn, ms) => {
     let timeout;
     return function () {
@@ -41,17 +40,32 @@ function showRepo(user) {
     const repoContainer = document.createElement('div');
     repoContainer.classList.add('repo-container')
     repo.appendChild(repoContainer)
-    repoContainer.innerHTML += `<p class="repo-container_name">Name: ${user.name}</p>
-                                <p class="repo-container_login">Owner: ${user.owner.login}</p>
-                                <p class="repo-container_stars">Stars: ${user.stargazers_count}</p>`
+    if(user.name) {
+        let a = createElement ('repo-container_name', `Name: ${user.name}`)
+        repoContainer.appendChild(a)
+    }
+    if(user.owner.login) {
+        let b = createElement ('repo-container_login', `Owner: ${user.owner.login}`)
+        repoContainer.appendChild(b)
+    }
+    if(user.stargazers_count) {
+        let b = createElement ('repo-container_stars', `Stars: ${user.stargazers_count}`)
+        repoContainer.appendChild(b)
+    }
     const close = document.createElement('div');
     close.classList.add('close')
     repoContainer.appendChild(close)
     close.onclick = function () {
         repoContainer.remove()
     }
-}
 
+}
+function createElement (className, text) {
+    const repoName = document.createElement('p');
+    repoName.classList.add(className);
+    repoName.textContent = text;
+    return repoName;
+}
 
 
 
