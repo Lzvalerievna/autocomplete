@@ -37,39 +37,21 @@ searchInput.addEventListener('keyup', function (e) {
     if (e.keyCode !== 32) debounce2();
 })
 function showRepo(user) {
-    const repoContainer = document.createElement('div');
-    repoContainer.classList.add('repo-container')
-    repo.appendChild(repoContainer)
-    if(user.name) {
-        let a = createElement ('repo-container_name', `Name: ${user.name}`)
-        repoContainer.appendChild(a)
-    }
-    if(user.owner.login) {
-        let b = createElement ('repo-container_login', `Owner: ${user.owner.login}`)
-        repoContainer.appendChild(b)
-    }
-    if(user.stargazers_count) {
-        let b = createElement ('repo-container_stars', `Stars: ${user.stargazers_count}`)
-        repoContainer.appendChild(b)
-    }
-    const close = document.createElement('div');
-    close.classList.add('close')
-    repoContainer.appendChild(close)
-    close.onclick = function () {
-        repoContainer.remove()
-    }
+    let repoList =  createElementP ('div', 'repo-container', repo)
 
+    createElementP ('p','repo-container_name', repoList, `Name: ${user.name}`)
+    createElementP ('p','repo-container_login', repoList, `Owner: ${user.owner.login}`)
+    createElementP ('p','repo-container_stars', repoList,`Stars: ${user.stargazers_count}`)
+
+    const close = createElementP('div', 'close', repoList);
+    close.onclick = function () {
+        repoList.remove()
+    }
 }
-function createElement (className, text) {
-    const repoName = document.createElement('p');
+function createElementP (tagName, className, rodEl,text) {
+    const repoName = document.createElement(tagName);
     repoName.classList.add(className);
     repoName.textContent = text;
+    rodEl.appendChild(repoName);
     return repoName;
 }
-
-
-
-
-
-
-
